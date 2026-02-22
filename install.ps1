@@ -120,12 +120,12 @@ function Ensure-Git {
 
 # ── Step 3: Install Symi via npm ─────────────────────────────────────────
 function Install-SyMiNpm {
-    Write-Info "Installing symi@$Tag via npm..."
+    Write-Info "Installing @symerian/symi@$Tag via npm..."
     if ($DryRun) {
-        Write-Info "[dry-run] npm install -g symi@$Tag"
+        Write-Info "[dry-run] npm install -g @symerian/symi@$Tag"
         return
     }
-    & npm install -g "symi@$Tag"
+    & npm install -g "@symerian/symi@$Tag"
     if ($LASTEXITCODE -ne 0) {
         Write-Err "npm install failed with exit code $LASTEXITCODE"
         exit 1

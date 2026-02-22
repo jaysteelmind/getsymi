@@ -279,7 +279,7 @@ install_npm() {
   local tag="$VERSION"
   if [ "$USE_BETA" = "1" ]; then
     local beta_ver
-    beta_ver="$(npm view symi@beta version 2>/dev/null || echo "")"
+    beta_ver="$(npm view @symerian/symi@beta version 2>/dev/null || echo "")"
     if [ -n "$beta_ver" ]; then
       tag="beta"
       info "Beta available: $beta_ver"
@@ -289,13 +289,13 @@ install_npm() {
   fi
 
   fix_npm_prefix
-  info "Installing symi@$tag via npm..."
+  info "Installing @symerian/symi@$tag via npm..."
   if [ "$DRY_RUN" = "1" ]; then
-    info "[dry-run] npm install -g symi@$tag"
+    info "[dry-run] npm install -g @symerian/symi@$tag"
   else
-    if ! npm install -g "symi@$tag" --loglevel="$NPM_LOGLEVEL"; then
+    if ! npm install -g "@symerian/symi@$tag" --loglevel="$NPM_LOGLEVEL"; then
       err "npm install failed. Trying with --loglevel=verbose for diagnostics..."
-      npm install -g "symi@$tag" --loglevel=verbose || die "npm install -g symi@$tag failed."
+      npm install -g "@symerian/symi@$tag" --loglevel=verbose || die "npm install -g @symerian/symi@$tag failed."
     fi
   fi
 }

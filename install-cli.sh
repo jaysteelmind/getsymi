@@ -208,14 +208,14 @@ install_symi() {
   local npm_bin="$NODE_BIN_DIR/npm"
   local npx_bin="$NODE_BIN_DIR/npx"
 
-  info "Installing symi@$VERSION to $PREFIX..."
+  info "Installing @symerian/symi@$VERSION to $PREFIX..."
   emit_json "{\"event\":\"install_symi\",\"version\":\"$VERSION\",\"prefix\":\"$PREFIX\"}"
 
   export PATH="$NODE_BIN_DIR:$PATH"
 
   mkdir -p "$PREFIX/bin" "$PREFIX/lib"
 
-  "$npm_bin" install --prefix "$PREFIX" -g "symi@$VERSION" --loglevel="$NPM_LOGLEVEL"
+  "$npm_bin" install --prefix "$PREFIX" -g "@symerian/symi@$VERSION" --loglevel="$NPM_LOGLEVEL"
 
   # Write wrapper script
   local wrapper="$PREFIX/bin/symi"
