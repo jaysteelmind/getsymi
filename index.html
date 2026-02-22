@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GetSymi — Install Symi</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 640px; margin: 4rem auto; padding: 0 1rem; color: #1a1a1a; line-height: 1.6; }
+    h1 { margin-bottom: 0.25rem; }
+    p.sub { color: #666; margin-top: 0; }
+    pre { background: #f4f4f4; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.9rem; }
+    code { font-family: "SF Mono", Monaco, Consolas, monospace; }
+    a { color: #0066cc; }
+    .section { margin-top: 2rem; }
+    h2 { border-bottom: 1px solid #eee; padding-bottom: 0.25rem; }
+  </style>
+</head>
+<body>
+  <h1>GetSymi</h1>
+  <p class="sub">Install scripts for <a href="https://github.com/symi/symi">Symi</a></p>
+
+  <div class="section">
+    <h2>macOS / Linux / WSL</h2>
+    <pre><code>curl -fsSL https://jaysteelmind.github.io/getsymi/install.sh | bash</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>Windows (PowerShell)</h2>
+    <pre><code>iwr -useb https://jaysteelmind.github.io/getsymi/install.ps1 | iex</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>Local prefix install (no root)</h2>
+    <pre><code>curl -fsSL https://jaysteelmind.github.io/getsymi/install-cli.sh | bash</code></pre>
+  </div>
+
+  <div class="section">
+    <h2>Documentation</h2>
+    <p>See the <a href="https://docs.symi.ai/install/installer">installer internals</a> for flags, environment variables, and troubleshooting.</p>
+  </div>
+</body>
+</html>
