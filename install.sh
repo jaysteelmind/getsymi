@@ -248,15 +248,20 @@ ensure_git() {
 # ---------------------------------------------------------------------------
 fix_npm_prefix() {
   [ "$OS" = "linux" ] || return 0
+  if [ "$(id -u)" -eq 0 ]; then return 0; fi
+
   local prefix
   prefix="$(npm config get prefix 2>/dev/null || echo "")"
-  if [ -n "$prefix" ] && [ -w "$prefix/lib" ] 2>/dev/null; then return 0; fi
-  if [ "$(id -u)" -eq 0 ]; then return 0; fi
+
+  # Check if current prefix lib dir is writable by this user
+  if [ -n "$prefix" ] && [ -d "$prefix/lib" ] && [ -w "$prefix/lib" ]; then
+    return 0
+  fi
 
   local new_prefix="$HOME/.npm-global"
   info "npm prefix not writable — switching to $new_prefix"
-  mkdir -p "$new_prefix"
-  dry npm config set prefix "$new_prefix"
+  mkdir -p "$new_prefix/lib/node_modules" "$new_prefix/bin"
+  npm config set prefix "$new_prefix"
 
   local bin_dir="$new_prefix/bin"
   for rc in "$HOME/.bashrc" "$HOME/.zshrc" "$HOME/.profile"; do
@@ -285,7 +290,14 @@ install_npm() {
 
   fix_npm_prefix
   info "Installing symi@$tag via npm..."
-  dry npm install -g "symi@$tag" --loglevel="$NPM_LOGLEVEL"
+  if [ "$DRY_RUN" = "1" ]; then
+    info "[dry-run] npm install -g symi@$tag"
+  else
+    if ! npm install -g "symi@$tag" --loglevel="$NPM_LOGLEVEL"; then
+      err "npm install failed. Trying with --loglevel=verbose for diagnostics..."
+      npm install -g "symi@$tag" --loglevel=verbose || die "npm install -g symi@$tag failed."
+    fi
+  fi
 }
 
 install_git() {
